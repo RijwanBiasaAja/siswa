@@ -25,3 +25,20 @@ const firebaseConfig = {
 // Inisialisasi firebase
 const aplikasi = initializeApp(firebaseConfig)
 const basisdata = getFirestore(aplikasi)
+
+export async function ambilDaftarSiswa() {
+  const refDokumen = collection(basisdata, "siswa");
+  const kueri = query(refDokumen, orderBy("nama"));
+  const cuplikankueri = await getDocs(kueri);
+  
+  let hasilkueri = [];
+  cuplikankueri.forEach((dokumen) => {
+    hasilkueri.push({
+      id: dokumen.id,
+      nama: dokumen.data().nama,
+      alamat: dokumen.data().alamat
+    })
+  })
+  
+  return hasilkueri;
+}
