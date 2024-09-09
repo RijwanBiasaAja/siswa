@@ -13,32 +13,35 @@
 <body>
   <h1>Menambah Data Siswa</h1>
   
-  <from class="mb-3">
+  <form class="mb-3">
     <div class="mb-3">
       <label class="form-label">Nama</label>
-      <input type="text" class="form-control" id="infutnama">
+      <input type="text" class="form-control" id="inputnama">
     </div>
     <div class="mb-3"></div>
      <label class="form-label">Alamat</label>
-     <input type="text" class="form-control" id="infutalamat">
+     <input type="text" class="form-control" id="inputalamat">
      <div class="mb-3">
        
      </div>
-  </from>
+     <button class="btn btn-primary" id="tombolsimpan">simpan</button>
+  </form>
   
-  <button class="btn btn-primary" id="tombolsimpan">simpan</button>
   <a href="index.html">Kembali ke daftar siswa</a>
   
   <script type="module">
-    import { tambahSiswa } form "./main.js";
+    import { tambahSiswa } from "./main.js";
     
     $(document).ready(async function() {
       // ambil data dari formulir
-      let nama = $("#inputnama").val()
-      let alamat = $("#inputalamat").val()
       
       // ketika tombol tambah di pencet
-      $("#tombolsimpan").click(async function() {
+      $("#tombolsimpan").click(async function(event) {
+        event.preventDefault()
+        
+        let nama = $("#inputnama").val()
+      let alamat = $("#inputalamat").val()
+        
         await tambahSiswa(nama,alamat)
         window.location.href ="index.html"
       })
